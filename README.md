@@ -47,14 +47,16 @@ No local Android Studio or local build step is required for v0.1.
 
 ## v0.1 device gate
 
-Before merging, confirm on the target Samsung device that:
+**Passed 2026-08-07 on the target Samsung SM-A166U.**
 
-- the APK installs and launches;
-- model, Android version, patch date, build, baseband and fingerprint look correct;
-- installed-package count is plausible;
-- Clock Tools, Drafts, Field Watch, Ledger and Update Auditor are classified FIRST PARTY;
-- known system apps are classified SYSTEM;
-- ordinary installed apps are classified USER;
-- package version/install/update metadata is populated where expected;
-- refreshing does not crash or visibly hang;
-- Rethink or another network observer shows no network activity attributable to Update Auditor.
+Validated on-device:
+
+- APK installs and launches;
+- model, Android version, patch date, build, baseband and fingerprint are coherent;
+- installed-package inventory is plausible (498 observed during the gate);
+- Clock Tools, Drafts, Field Watch, Ledger and Update Auditor classify FIRST PARTY;
+- known system apps classify SYSTEM;
+- ordinary installed apps classify USER;
+- package version/install/update metadata populates where Android exposes it;
+- repeated refresh does not crash or visibly hang;
+- Rethink shows no network activity attributable to Update Auditor.
