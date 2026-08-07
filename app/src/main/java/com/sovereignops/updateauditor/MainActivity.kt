@@ -4,7 +4,6 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.provider.Settings
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -149,16 +148,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openSystemUpdateSettings() {
-        val intent = Intent(Settings.ACTION_SYSTEM_UPDATE_SETTINGS)
-        val handler = packageManager.resolveActivity(intent, PackageManager.MATCH_SYSTEM_ONLY)
+        val intent = Intent(SYSTEM_UPDATE_SETTINGS_ACTION)
+        val handler = packageManager
+            .queryIntentActivities(intent, PackageManager.MATCH_SYSTEM_ONLY)
+            .asSequence()
+            .filter { it.priority > 0 && it.activityInfo != null }
+            .maxByOrNull { it.priority }
+
         if (handler?.activityInfo == null) {
-            statusText.text = "No system-owned software-update settings handler was found."
+            statusText.text = "No trusted system software-update settings handler was found."
             return
         }
 
-        intent.component = ComponentName(
-            handler.activityInfo.packageName,
-            handler.activityInfo.name,
+        intent.setComponent(
+            ComponentName(
+                handler.activityInfo.packageName,
+                handler.activityInfo.name,
+            ),
         )
 
         runCatching { startActivity(intent) }
@@ -215,6 +221,8 @@ class MainActivity : AppCompatActivity() {
         name.replace('_', ' ')
 
     companion object {
+        private const val SYSTEM_UPDATE_SETTINGS_ACTION = "android.settings.SYSTEM_UPDATE_SETTINGS"
+
         private val CHECKED_TIME_FORMAT = DateTimeFormatter
             .ofPattern("h:mm a")
             .withZone(ZoneId.systemDefault())
