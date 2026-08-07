@@ -14,9 +14,13 @@ object FirmwareBuildResolver {
             .uppercase(Locale.US)
             .removePrefix("SM-")
 
+        // Android build fingerprints are shaped roughly as:
+        // brand/product/device:release/id/incremental:type/tags
+        // Isolate the build section before taking the final slash-delimited value.
         val fingerprintBuild = fingerprint
-            .substringAfterLast('/', missingDelimiterValue = "")
+            .substringAfter(':', missingDelimiterValue = "")
             .substringBefore(':')
+            .substringAfterLast('/')
             .trim()
 
         val radioBuild = baseband
