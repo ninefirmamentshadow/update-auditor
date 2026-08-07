@@ -9,6 +9,7 @@ data class DeviceState(
     val sdkInt: Int,
     val securityPatch: String,
     val buildId: String,
+    val firmwareBuild: String,
     val fingerprint: String,
     val baseband: String,
 )
