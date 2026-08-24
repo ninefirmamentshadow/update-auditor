@@ -1,5 +1,10 @@
 name: build
 
+# Debug is the fresh-clone floor; release is the operational artifact. The debug
+# APK always builds so a fork or a secretless clone stays green. The signed
+# release APK builds only once the repo has the ANDROID_KEYSTORE_BASE64 secret
+# set (Settings > Secrets and variables > Actions), and its absence breaks
+# nothing. A debug build is never published as the operational release.
 on:
   push:
     branches: ['**']
@@ -13,6 +18,11 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
+    # secrets.* is disallowed inside `if:` conditionals (parse-time restriction).
+    # Compute it into a job env var and branch on that instead.
+    env:
+      HAS_RELEASE_SIGNING: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -22,7 +32,7 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Gradle 8.9
+      - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
@@ -33,9 +43,88 @@ jobs:
       - name: Build debug APK
         run: gradle assembleDebug --stacktrace
 
+      - name: Write debug provenance
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          apk="app/build/outputs/apk/debug/app-debug.apk"
+          manifest="app/build/outputs/apk/debug/build-info.txt"
+          version_name="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -1)"
+          version_code="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -1)"
+          test -n "$version_name" && test -n "$version_code"
+          {
+            echo "artifact=update-auditor-debug"
+            echo "commit=$GITHUB_SHA"
+            echo "version_name=$version_name"
+            echo "version_code=$version_code"
+            echo "apk_sha256=$(sha256sum "$apk" | cut -d ' ' -f 1)"
+          } > "$manifest"
+
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
           name: update-auditor-debug
-          path: app/build/outputs/apk/debug/*.apk
+          path: |
+            app/build/outputs/apk/debug/*.apk
+            app/build/outputs/apk/debug/build-info.txt
           if-no-files-found: error
+
+      # Release signing only runs once the repo has these secrets set. Until then
+      # this and the following steps are skipped and only the debug APK is built.
+      - name: Decode release keystore
+        if: ${{ github.event_name != 'pull_request' && env.HAS_RELEASE_SIGNING == 'true' }}
+        run: printf '%s' "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > "${{ runner.temp }}/release.jks"
+
+      - name: Build release APK
+        if: ${{ github.event_name != 'pull_request' && env.HAS_RELEASE_SIGNING == 'true' }}
+        env:
+          KEYSTORE_FILE: ${{ runner.temp }}/release.jks
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: gradle assembleRelease --stacktrace
+
+      - name: Write release provenance
+        if: ${{ github.event_name != 'pull_request' && env.HAS_RELEASE_SIGNING == 'true' }}
+        env:
+          KEYSTORE_FILE: ${{ runner.temp }}/release.jks
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          apk="app/build/outputs/apk/release/app-release.apk"
+          manifest="app/build/outputs/apk/release/build-info.txt"
+          cert="${RUNNER_TEMP}/release-cert.der"
+          version_name="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -1)"
+          version_code="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -1)"
+          apksigner="$(find "$ANDROID_HOME/build-tools" -type f -name apksigner -print | sort -V | tail -1)"
+          test -x "$apksigner"
+          "$apksigner" verify "$apk"
+          keytool -exportcert -noprompt \
+            -keystore "$KEYSTORE_FILE" \
+            -storepass "$KEYSTORE_PASSWORD" \
+            -alias "$KEY_ALIAS" \
+            -file "$cert" > /dev/null
+          signing_cert_sha256="$(sha256sum "$cert" | cut -d ' ' -f 1)"
+          test -n "$version_name" && test -n "$version_code"
+          [[ "$signing_cert_sha256" =~ ^[0-9a-f]{64}$ ]]
+          {
+            echo "artifact=update-auditor-release"
+            echo "commit=$GITHUB_SHA"
+            echo "version_name=$version_name"
+            echo "version_code=$version_code"
+            echo "apk_sha256=$(sha256sum "$apk" | cut -d ' ' -f 1)"
+            echo "signing_cert_sha256=$signing_cert_sha256"
+          } > "$manifest"
+
+      - name: Upload release APK
+        if: ${{ github.event_name != 'pull_request' && env.HAS_RELEASE_SIGNING == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: update-auditor-release
+          path: |
+            app/build/outputs/apk/release/app-release.apk
+            app/build/outputs/apk/release/build-info.txt
+          retention-days: 90
+
+      - name: Remove release keystore
+        if: ${{ always() && github.event_name != 'pull_request' && env.HAS_RELEASE_SIGNING == 'true' }}
+        run: rm -f "${{ runner.temp }}/release.jks" "${{ runner.temp }}/release-cert.der"

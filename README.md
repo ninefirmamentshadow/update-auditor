@@ -40,10 +40,38 @@ The normal workflow is phone-only:
 1. Push a branch or open a PR.
 2. GitHub Actions installs JDK 17 and Gradle 8.9.
 3. `gradle test` must pass.
-4. `gradle assembleDebug` builds the APK.
+4. `gradle assembleDebug` builds the sideloadable debug APK.
 5. Download the `update-auditor-debug` workflow artifact and sideload it on the device.
 
-No local Android Studio or local build step is required for v0.1.
+No local Android Studio or local build step is required.
+
+### Out of debug — signed release
+
+The debug APK is the fresh-clone floor. The operational artifact is a **signed
+release APK**, and a debug build is never published as the operational release.
+The release path is gated on repository secrets so a fork or a secretless clone
+stays green:
+
+| Secret | Purpose |
+| --- | --- |
+| `ANDROID_KEYSTORE_BASE64` | base64 of the release keystore; its presence enables the signed release job |
+| `ANDROID_KEYSTORE_PASSWORD` | keystore password |
+| `ANDROID_KEY_ALIAS` | signing key alias |
+| `ANDROID_KEY_PASSWORD` | signing key password |
+
+With those set, CI also builds `assembleRelease`, verifies the signature with
+`apksigner`, records signing-certificate and APK SHA-256 provenance, and uploads
+the `update-auditor-release` artifact. Locally, the same signing is picked up
+from a gitignored `keystore.properties` (`storeFile` / `storePassword` /
+`keyAlias` / `keyPassword`). Without any of that, the release variant still
+builds unsigned rather than failing.
+
+## Agent execution
+
+Automated agents: read `AGENTS.md` before editing. It carries the security
+posture invariants (no `INTERNET` permission, no telemetry, no package
+mutation) and the protected-data boundary. `Sovereign-Ops` is the umbrella
+source of truth.
 
 ## v0.1 device gate
 
