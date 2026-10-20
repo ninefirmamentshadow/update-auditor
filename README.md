@@ -38,12 +38,21 @@ Known first-party packages include Clock Tools, Drafts, Field Watch, Ledger, and
 The normal workflow is phone-only:
 
 1. Push a branch or open a PR.
-2. GitHub Actions installs JDK 17 and Gradle 8.9.
-3. `gradle test` must pass.
-4. `gradle assembleDebug` builds the sideloadable debug APK.
-5. Download the `update-auditor-debug` workflow artifact and sideload it on the device.
+2. GitHub Actions installs JDK 17 and runs `scripts/verify.sh` (Gradle 8.9 via the
+   committed, checksum-pinned wrapper): JVM tests including screenshot goldens, lint,
+   `assembleDebug`, the third-party inventory check and `git diff --check`.
+3. Download the `update-auditor-debug` workflow artifact and sideload it on the device.
 
-No local Android Studio or local build step is required.
+On a laptop or in an agent session the same command works: `scripts/verify.sh`
+(needs a JDK 17+ and the Android SDK; `scripts/bootstrap-android-sdk.sh` installs
+the SDK pieces and verifies Google's checksum). It prints PASS, FAIL or NOT_RUN per
+step with the commit sha; a step that could not run is never shown as a pass.
+
+Regression screens (Robolectric + Roborazzi, JVM only, no emulator) are compared to
+the PNGs in `app/src/test/screenshots/` at 320 dp and 411 dp, font scale 1.0 and
+2.0, light and dark, with Accessibility Test Framework checks on each. After an
+intended UI change run `./gradlew recordRoborazziDebug` and review the PNG diff.
+Lint fails on new problems; existing ones are tracked in `app/lint-baseline.xml`.
 
 ### Out of debug — signed release
 
@@ -59,12 +68,14 @@ stays green:
 | `ANDROID_KEY_ALIAS` | signing key alias |
 | `ANDROID_KEY_PASSWORD` | signing key password |
 
-With those set, CI also builds `assembleRelease`, verifies the signature with
-`apksigner`, records signing-certificate and APK SHA-256 provenance, and uploads
-the `update-auditor-release` artifact. Locally, the same signing is picked up
-from a gitignored `keystore.properties` (`storeFile` / `storePassword` /
-`keyAlias` / `keyPassword`). Without any of that, the release variant still
-builds unsigned rather than failing.
+With those set, CI also runs `scripts/release.sh`, which builds `assembleRelease`,
+refuses a debuggable or unsigned APK, reads the signer certificate from the APK
+itself with `apksigner`, compares its SHA-256 with the owner-committed pin in
+`release/signing-cert.sha256` (or prints the digest to pin), and writes
+`release-manifest.json` and a changelog. The `update-auditor-release` artifact
+carries those. Locally, the same signing is picked up from a gitignored
+`keystore.properties` (`storeFile` / `storePassword` / `keyAlias` / `keyPassword`).
+Without any of that, `scripts/release.sh` stops with `unsigned: not a release`.
 
 ## Agent execution
 

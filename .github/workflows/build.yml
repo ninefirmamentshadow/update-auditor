@@ -1,10 +1,11 @@
 name: build
 
-# Debug is the fresh-clone floor; release is the operational artifact. The debug
-# APK always builds so a fork or a secretless clone stays green. The signed
-# release APK builds only once the repo has the ANDROID_KEYSTORE_BASE64 secret
-# set (Settings > Secrets and variables > Actions), and its absence breaks
-# nothing. A debug build is never published as the operational release.
+# CI runs the same script a developer or agent runs locally (scripts/verify.sh), so
+# "green" means the same thing everywhere. Debug is the fresh-clone floor and always
+# builds. The signed release APK builds only once the repo has the
+# ANDROID_KEYSTORE_BASE64 secret, and its absence breaks nothing. scripts/release.sh
+# refuses debuggable or unsigned output, so a debug build can never be published as
+# the operational release.
 on:
   push:
     branches: ['**']
@@ -14,6 +15,9 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -25,6 +29,9 @@ jobs:
       HAS_RELEASE_SIGNING: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The release changelog reads tags and history.
+          fetch-depth: 0
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -32,24 +39,30 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      # Uses the committed wrapper (Gradle 8.9, checksum-pinned); no gradle-version here.
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.9'
 
-      - name: Unit tests
-        run: gradle test --stacktrace
+      - name: Ensure Android SDK pieces
+        run: |
+          if [ ! -d "${ANDROID_HOME:-/nonexistent}/build-tools/35.0.0" ] || [ ! -d "${ANDROID_HOME:-/nonexistent}/platforms/android-35" ]; then
+            scripts/bootstrap-android-sdk.sh
+          fi
 
-      - name: Build debug APK
-        run: gradle assembleDebug --stacktrace
+      - name: Verify (tests, screenshots, lint, debug build, inventory, whitespace)
+        env:
+          VERIFY_GRADLE_ARGS: --stacktrace
+          VERIFY_RETRIES: '2'
+        run: scripts/verify.sh
 
       - name: Write debug provenance
         if: ${{ github.event_name != 'pull_request' }}
         run: |
           apk="app/build/outputs/apk/debug/app-debug.apk"
           manifest="app/build/outputs/apk/debug/build-info.txt"
-          version_name="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -1)"
-          version_code="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -1)"
+          version="$(./gradlew -q --no-daemon printVersion)"
+          version_name="$(printf '%s\n' "$version" | sed -n 's/^versionName=//p')"
+          version_code="$(printf '%s\n' "$version" | sed -n 's/^versionCode=//p')"
           test -n "$version_name" && test -n "$version_code"
           {
             echo "artifact=update-auditor-debug"
@@ -68,52 +81,27 @@ jobs:
             app/build/outputs/apk/debug/build-info.txt
           if-no-files-found: error
 
-      # Release signing only runs once the repo has these secrets set. Until then
-      # this and the following steps are skipped and only the debug APK is built.
+      # Release signing only runs once the repo has the secrets set. The keystore
+      # and passwords reach the build through environment variables only; nothing
+      # secret is interpolated into script text.
       - name: Decode release keystore
         if: ${{ github.event_name != 'pull_request' && env.HAS_RELEASE_SIGNING == 'true' }}
-        run: printf '%s' "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > "${{ runner.temp }}/release.jks"
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: printf '%s' "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.jks"
 
-      - name: Build release APK
+      - name: Build and inspect release APK
         if: ${{ github.event_name != 'pull_request' && env.HAS_RELEASE_SIGNING == 'true' }}
         env:
           KEYSTORE_FILE: ${{ runner.temp }}/release.jks
           KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-        run: gradle assembleRelease --stacktrace
-
-      - name: Write release provenance
-        if: ${{ github.event_name != 'pull_request' && env.HAS_RELEASE_SIGNING == 'true' }}
-        env:
-          KEYSTORE_FILE: ${{ runner.temp }}/release.jks
-          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-        run: |
-          apk="app/build/outputs/apk/release/app-release.apk"
-          manifest="app/build/outputs/apk/release/build-info.txt"
-          cert="${RUNNER_TEMP}/release-cert.der"
-          version_name="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -1)"
-          version_code="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -1)"
-          apksigner="$(find "$ANDROID_HOME/build-tools" -type f -name apksigner -print | sort -V | tail -1)"
-          test -x "$apksigner"
-          "$apksigner" verify "$apk"
-          keytool -exportcert -noprompt \
-            -keystore "$KEYSTORE_FILE" \
-            -storepass "$KEYSTORE_PASSWORD" \
-            -alias "$KEY_ALIAS" \
-            -file "$cert" > /dev/null
-          signing_cert_sha256="$(sha256sum "$cert" | cut -d ' ' -f 1)"
-          test -n "$version_name" && test -n "$version_code"
-          [[ "$signing_cert_sha256" =~ ^[0-9a-f]{64}$ ]]
-          {
-            echo "artifact=update-auditor-release"
-            echo "commit=$GITHUB_SHA"
-            echo "version_name=$version_name"
-            echo "version_code=$version_code"
-            echo "apk_sha256=$(sha256sum "$apk" | cut -d ' ' -f 1)"
-            echo "signing_cert_sha256=$signing_cert_sha256"
-          } > "$manifest"
+          VERIFY_GRADLE_ARGS: --stacktrace
+        # verify.sh already passed above at this commit. The script reads the signer
+        # certificate digest from the APK itself (apksigner), refuses a debuggable
+        # or unsigned APK, and writes release/release-manifest.json.
+        run: scripts/release.sh --skip-verify
 
       - name: Upload release APK
         if: ${{ github.event_name != 'pull_request' && env.HAS_RELEASE_SIGNING == 'true' }}
@@ -121,10 +109,12 @@ jobs:
         with:
           name: update-auditor-release
           path: |
-            app/build/outputs/apk/release/app-release.apk
-            app/build/outputs/apk/release/build-info.txt
+            release/update-auditor-*.apk
+            release/release-manifest.json
+            release/changelog.md
           retention-days: 90
+          if-no-files-found: error
 
       - name: Remove release keystore
         if: ${{ always() && github.event_name != 'pull_request' && env.HAS_RELEASE_SIGNING == 'true' }}
-        run: rm -f "${{ runner.temp }}/release.jks" "${{ runner.temp }}/release-cert.der"
+        run: rm -f "$RUNNER_TEMP/release.jks"

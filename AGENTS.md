@@ -16,8 +16,14 @@ actually been checked. See `README.md` and `docs/V0_2_DESIGN.md`.
 - `app/` — the Android application (Kotlin).
 - `docs/` — design notes. A design document does not by itself authorize its
   own implementation; the owner's current instruction does.
-- `.github/workflows/build.yml` — the only CI: unit tests, debug APK, and a
-  signed release APK when keystore secrets are present.
+- `scripts/` — the portable pipeline: `verify.sh` (tests, screenshot goldens,
+  lint, debug build, third-party inventory, whitespace; PASS/FAIL/NOT_RUN with the
+  HEAD sha), `release.sh`, `bootstrap-android-sdk.sh`, `check_third_party.py`,
+  `handoff.py`. CI and agents run the same scripts.
+- `.agent/` — the branch handoff schema and one handoff file per active branch.
+- `third_party.json`, `THIRD_PARTY_NOTICES.md`, `licenses/` — the component inventory.
+- `.github/workflows/build.yml` — the only CI: runs `scripts/verify.sh`, and a
+  signed release APK via `scripts/release.sh` when keystore secrets are present.
 
 ## Standing operating directive
 
@@ -72,16 +78,22 @@ owner explicitly provides a sanitized value for that specific output.
 
 ## Validation
 
-Run the smallest relevant checks that materially validate the change:
-
 ```bash
-gradle test            # pure JVM unit tests — the verdict/classifier logic
-gradle assembleDebug   # the app compiles
-gradle assembleRelease # the shipping artifact compiles (signed if keys present)
+scripts/verify.sh              # test (incl. screenshot goldens), lintDebug, assembleDebug,
+                               # third-party inventory, git diff --check
+scripts/verify.sh --handoff    # same, and record results in .agent/handoffs/<branch>.json
+scripts/release.sh             # signed release only; refuses unsigned/debuggable output
+./gradlew recordRoborazziDebug # re-record screenshot goldens after an intended UI change
 ```
 
+`verify.sh` prints PASS, FAIL or NOT_RUN per step with the HEAD sha. A missing SDK
+or JDK is NOT_RUN plus the bootstrap command and is never reported as a pass.
+Device and instrumented tests are not part of it and are always NOT_RUN there.
 A successful build is not device validation. The README records the on-device
 gate; distinguish build evidence from real-device evidence.
+
+Only `verify.sh` writes `verified` in a handoff file; agents write `claimed`,
+`pending` and `next_action`. One agent owns an active branch; others read or review.
 
 ## Git discipline
 
@@ -95,7 +107,8 @@ gate; distinguish build evidence from real-device evidence.
 ## Completion checklist
 
 - The requested behavior is implemented, not merely described.
-- `gradle test` and the relevant assemble task pass, or exact failures are named.
+- `scripts/verify.sh` passes at the commit being pushed, or the exact FAIL / NOT_RUN
+  steps are named.
 - No protected identity, location, or contact data was exposed.
 - The security posture above was not silently weakened.
 - Docs and tests were updated when the implementation changed their contract.

@@ -21,16 +21,17 @@ git log -1 --format='last commit: %h %s (%cr)' 2>/dev/null || printf 'last commi
 
 printf '\n-- build & test --\n'
 cat <<'NOTE'
-Unit tests:   gradle test        (or ./gradlew test if a wrapper is present)
-Debug APK:    gradle assembleDebug
-Release APK:  gradle assembleRelease   (signed only when keystore material is set)
-CI:           .github/workflows/build.yml runs tests + both APK paths.
+Verify:       scripts/verify.sh [--handoff]   (tests, screenshots, lint, debug build, inventory)
+Release:      scripts/release.sh              (refuses unsigned/debuggable; owner supplies keys)
+SDK:          scripts/bootstrap-android-sdk.sh, then export ANDROID_HOME
+CI:           .github/workflows/build.yml runs scripts/verify.sh, then release.sh when keystore secrets exist.
 NOTE
 
 printf '\n-- reminders --\n'
 cat <<'NOTE'
 Read AGENTS.md and SOVEREIGN_EXECUTION_PROTOCOL.md (standing directive: execute,
-verify alongside, minimal friction) before editing. This app is read-only by design: no INTERNET
+verify alongside, minimal friction) before editing. Read your branch's handoff file in
+.agent/handoffs/ first if it exists. This app is read-only by design: no INTERNET
 permission, no telemetry, no package mutation. Do not add a network posture or
 publish a debug build as an operational release without an explicit owner call.
 NOTE

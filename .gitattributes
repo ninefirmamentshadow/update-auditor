@@ -1,0 +1,3 @@
+# Windows batch files are committed with CRLF line endings, as Gradle generates them.
+*.bat whitespace=cr-at-eol
+*.jar binary

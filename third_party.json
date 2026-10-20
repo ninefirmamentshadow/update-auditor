@@ -1,0 +1,276 @@
+{
+  "schema": 1,
+  "project": "update-auditor",
+  "description": "Machine-readable third-party inventory. Every Gradle dependency, plugin and the Gradle wrapper is recorded here; scripts/check_third_party.py fails when gradle/libs.versions.toml declares something that is missing.",
+  "components": [
+    {
+      "name": "AndroidX Core KTX",
+      "upstream_url": "https://developer.android.com/jetpack/androidx/releases/core",
+      "version_or_commit": "1.13.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/core/core-ktx/1.13.1/core-ktx-1.13.1.pom"
+      ],
+      "files": [
+        "(dependency; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.core:core-ktx"
+      ],
+      "modified": false
+    },
+    {
+      "name": "AndroidX AppCompat",
+      "upstream_url": "https://developer.android.com/jetpack/androidx/releases/appcompat",
+      "version_or_commit": "1.7.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/appcompat/appcompat/1.7.0/appcompat-1.7.0.pom"
+      ],
+      "files": [
+        "(dependency; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.appcompat:appcompat"
+      ],
+      "modified": false
+    },
+    {
+      "name": "AndroidX RecyclerView",
+      "upstream_url": "https://developer.android.com/jetpack/androidx/releases/recyclerview",
+      "version_or_commit": "1.3.2",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/recyclerview/recyclerview/1.3.2/recyclerview-1.3.2.pom"
+      ],
+      "files": [
+        "(dependency; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.recyclerview:recyclerview"
+      ],
+      "modified": false
+    },
+    {
+      "name": "JUnit 4",
+      "upstream_url": "https://github.com/junit-team/junit4",
+      "version_or_commit": "4.13.2",
+      "spdx": "EPL-1.0",
+      "license_verified_from": [
+        "https://github.com/junit-team/junit4/blob/r4.13.2/LICENSE-junit.txt",
+        "https://repo.maven.apache.org/maven2/junit/junit/4.13.2/junit-4.13.2.pom"
+      ],
+      "files": [
+        "(test dependency; not shipped)"
+      ],
+      "notices_required": "Not distributed: test scope only.",
+      "scope": "test",
+      "coordinates": [
+        "junit:junit"
+      ],
+      "modified": false
+    },
+    {
+      "name": "Robolectric",
+      "upstream_url": "https://github.com/robolectric/robolectric",
+      "version_or_commit": "4.14.1",
+      "spdx": "MIT",
+      "license_verified_from": [
+        "https://github.com/robolectric/robolectric/blob/robolectric-4.14.1/LICENSE",
+        "https://repo.maven.apache.org/maven2/org/robolectric/robolectric/4.14.1/robolectric-4.14.1.pom"
+      ],
+      "files": [
+        "(test dependency; not shipped)"
+      ],
+      "notices_required": "Not distributed: test scope only. Its android-all jars (AOSP, Apache-2.0) are fetched at test time and not stored in this repository.",
+      "scope": "test",
+      "coordinates": [
+        "org.robolectric:robolectric"
+      ],
+      "modified": false
+    },
+    {
+      "name": "AndroidX Test Core",
+      "upstream_url": "https://github.com/android/android-test",
+      "version_or_commit": "1.6.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://github.com/android/android-test/blob/56f9439198ec34dba7f23aabc6319b719784e886/LICENSE",
+        "https://dl.google.com/android/maven2/androidx/test/core/1.6.1/core-1.6.1.pom"
+      ],
+      "files": [
+        "(test dependency; not shipped)"
+      ],
+      "notices_required": "Not distributed: test scope only.",
+      "scope": "test",
+      "coordinates": [
+        "androidx.test:core"
+      ],
+      "modified": false
+    },
+    {
+      "name": "AndroidX Test Ext JUnit",
+      "upstream_url": "https://github.com/android/android-test",
+      "version_or_commit": "1.2.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://github.com/android/android-test/blob/56f9439198ec34dba7f23aabc6319b719784e886/LICENSE",
+        "https://dl.google.com/android/maven2/androidx/test/ext/junit/1.2.1/junit-1.2.1.pom"
+      ],
+      "files": [
+        "(test dependency; not shipped)"
+      ],
+      "notices_required": "Not distributed: test scope only.",
+      "scope": "test",
+      "coordinates": [
+        "androidx.test.ext:junit"
+      ],
+      "modified": false
+    },
+    {
+      "name": "Espresso Core",
+      "upstream_url": "https://github.com/android/android-test",
+      "version_or_commit": "3.6.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://github.com/android/android-test/blob/56f9439198ec34dba7f23aabc6319b719784e886/LICENSE",
+        "https://dl.google.com/android/maven2/androidx/test/espresso/espresso-core/3.6.1/espresso-core-3.6.1.pom"
+      ],
+      "files": [
+        "(test dependency; not shipped)"
+      ],
+      "notices_required": "Not distributed: test scope only.",
+      "scope": "test",
+      "coordinates": [
+        "androidx.test.espresso:espresso-core"
+      ],
+      "modified": false
+    },
+    {
+      "name": "Roborazzi",
+      "upstream_url": "https://github.com/takahirom/roborazzi",
+      "version_or_commit": "1.46.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://github.com/takahirom/roborazzi/blob/1.46.1/LICENSE (tag 1.46.1 = c1af6cc6fa9cb3c7ac9272a0f3bda94588836078)",
+        "https://repo.maven.apache.org/maven2/io/github/takahirom/roborazzi/roborazzi/1.46.1/roborazzi-1.46.1.pom",
+        "https://repo.maven.apache.org/maven2/io/github/takahirom/roborazzi/roborazzi-junit-rule/1.46.1/roborazzi-junit-rule-1.46.1.pom",
+        "https://repo.maven.apache.org/maven2/io/github/takahirom/roborazzi/roborazzi-accessibility-check/1.46.1/roborazzi-accessibility-check-1.46.1.pom"
+      ],
+      "files": [
+        "(test dependency; not shipped)"
+      ],
+      "notices_required": "Not distributed: test scope only.",
+      "scope": "test",
+      "coordinates": [
+        "io.github.takahirom.roborazzi:roborazzi",
+        "io.github.takahirom.roborazzi:roborazzi-junit-rule",
+        "io.github.takahirom.roborazzi:roborazzi-accessibility-check"
+      ],
+      "modified": false
+    },
+    {
+      "name": "Accessibility Test Framework for Android",
+      "upstream_url": "https://github.com/google/Accessibility-Test-Framework-for-Android",
+      "version_or_commit": "4.1.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://github.com/google/Accessibility-Test-Framework-for-Android/blob/c65cab02b2a845c29c3da100d6adefd345a144e3/LICENSE (upstream publishes no release tags; this is the master commit Roborazzi 1.46.1 documents)",
+        "https://repo.maven.apache.org/maven2/com/google/android/apps/common/testing/accessibility/framework/accessibility-test-framework/4.1.1/accessibility-test-framework-4.1.1.pom"
+      ],
+      "files": [
+        "(test dependency; not shipped)"
+      ],
+      "notices_required": "Not distributed: test scope only.",
+      "scope": "test",
+      "coordinates": [
+        "com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework"
+      ],
+      "modified": false
+    },
+    {
+      "name": "Android Gradle Plugin",
+      "upstream_url": "https://developer.android.com/build/releases/gradle-plugin",
+      "version_or_commit": "8.7.2",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/com/android/tools/build/gradle/8.7.2/gradle-8.7.2.pom"
+      ],
+      "files": [
+        "(build tool; not shipped)"
+      ],
+      "notices_required": "Not distributed: build tool.",
+      "scope": "build",
+      "coordinates": [
+        "com.android.application"
+      ],
+      "modified": false
+    },
+    {
+      "name": "Kotlin Gradle plugin",
+      "upstream_url": "https://github.com/JetBrains/kotlin",
+      "version_or_commit": "2.0.21",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://github.com/JetBrains/kotlin/blob/v2.0.21/license/LICENSE.txt",
+        "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-gradle-plugin/2.0.21/kotlin-gradle-plugin-2.0.21.pom"
+      ],
+      "files": [
+        "(build tool; not shipped)"
+      ],
+      "notices_required": "Not distributed: build tool. The Kotlin standard library it adds to the APK is listed separately.",
+      "scope": "build",
+      "coordinates": [
+        "org.jetbrains.kotlin.android"
+      ],
+      "modified": false
+    },
+    {
+      "name": "Roborazzi Gradle plugin",
+      "upstream_url": "https://github.com/takahirom/roborazzi",
+      "version_or_commit": "1.46.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://github.com/takahirom/roborazzi/blob/1.46.1/LICENSE",
+        "https://repo.maven.apache.org/maven2/io/github/takahirom/roborazzi/roborazzi-gradle-plugin/1.46.1/roborazzi-gradle-plugin-1.46.1.pom"
+      ],
+      "files": [
+        "(build tool; not shipped)"
+      ],
+      "notices_required": "Not distributed: build tool.",
+      "scope": "build",
+      "coordinates": [
+        "io.github.takahirom.roborazzi"
+      ],
+      "modified": false
+    },
+    {
+      "name": "Gradle wrapper",
+      "upstream_url": "https://github.com/gradle/gradle",
+      "version_or_commit": "8.9",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://github.com/gradle/gradle/blob/v8.9.0/LICENSE",
+        "https://services.gradle.org/distributions/gradle-8.9-wrapper.jar.sha256"
+      ],
+      "files": [
+        "gradle/wrapper/gradle-wrapper.jar",
+        "gradle/wrapper/gradle-wrapper.properties",
+        "gradlew",
+        "gradlew.bat"
+      ],
+      "notices_required": "Apache-2.0: the wrapper jar and scripts keep their upstream headers; the license is recorded here. Not shipped in the APK.",
+      "scope": "build",
+      "sha256": "498495120a03b9a6ab5d155f5de3c8f0d986a449153702fb80fc80e134484f17",
+      "modified": false,
+      "coordinates": []
+    }
+  ],
+  "informed_by": []
+}
