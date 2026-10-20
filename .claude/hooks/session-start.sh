@@ -29,7 +29,8 @@ NOTE
 
 printf '\n-- reminders --\n'
 cat <<'NOTE'
-Read AGENTS.md before editing. This app is read-only by design: no INTERNET
+Read AGENTS.md and SOVEREIGN_EXECUTION_PROTOCOL.md (standing directive: execute,
+verify alongside, minimal friction) before editing. This app is read-only by design: no INTERNET
 permission, no telemetry, no package mutation. Do not add a network posture or
 publish a debug build as an operational release without an explicit owner call.
 NOTE

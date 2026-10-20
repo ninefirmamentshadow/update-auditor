@@ -19,6 +19,10 @@ actually been checked. See `README.md` and `docs/V0_2_DESIGN.md`.
 - `.github/workflows/build.yml` — the only CI: unit tests, debug APK, and a
   signed release APK when keystore secrets are present.
 
+## Standing operating directive
+
+`SOVEREIGN_EXECUTION_PROTOCOL.md` is the owner's default working style for every agent and workflow in this repository: execution first, verification alongside the work, minimal friction, risk-proportionate intervention, deliverables over commentary. Read it in full before starting. It applies unless the owner overrides it for a specific task; the security posture and protected data boundary below are its §4 boundaries made concrete.
+
 ## Scope and authority
 
 1. Follow the owner's current explicit instruction.

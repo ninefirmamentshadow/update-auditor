@@ -9,3 +9,8 @@ on-device gate, and `docs/V0_2_DESIGN.md` for the update-status roadmap.
 
 Sovereign-Ops is the umbrella source of truth; this repository is the standalone
 home of the app.
+
+Standing operating directive (applies to all work here unless the owner overrides
+it for a task):
+
+@SOVEREIGN_EXECUTION_PROTOCOL.md
