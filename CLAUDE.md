@@ -14,3 +14,8 @@ Standing operating directive (applies to all work here unless the owner override
 it for a task):
 
 @SOVEREIGN_EXECUTION_PROTOCOL.md
+
+Open-source reuse directive (supplements the protocol above; does not override
+higher-priority project rules):
+
+@OPEN_SOURCE_COMPLIANCE_PROTOCOL.md
