@@ -29,9 +29,10 @@ NOTE
 
 printf '\n-- reminders --\n'
 cat <<'NOTE'
-Read AGENTS.md and SOVEREIGN_EXECUTION_PROTOCOL.md (standing directive: execute,
-verify alongside, minimal friction) before editing. Read your branch's handoff file in
-.agent/handoffs/ first if it exists. This app is read-only by design: no INTERNET
-permission, no telemetry, no package mutation. Do not add a network posture or
-publish a debug build as an operational release without an explicit owner call.
+Read AGENTS.md, SOVEREIGN_EXECUTION_PROTOCOL.md (standing directive: execute, verify
+alongside, minimal friction) and OPEN_SOURCE_COMPLIANCE_PROTOCOL.md (verify licenses,
+keep notices, record every dependency in third_party.json) before editing. Read your
+branch's handoff file in .agent/handoffs/ first if it exists. This app is read-only by
+design: no INTERNET permission, no telemetry, no package mutation. Do not add a network
+posture or publish a debug build as an operational release without an explicit owner call.
 NOTE

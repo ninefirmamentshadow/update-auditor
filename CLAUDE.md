@@ -14,3 +14,8 @@ Standing operating directive (applies to all work here unless the owner override
 it for a task):
 
 @SOVEREIGN_EXECUTION_PROTOCOL.md
+
+Open-source reuse directive (applies whenever third-party code, text or assets
+enter this repository):
+
+@OPEN_SOURCE_COMPLIANCE_PROTOCOL.md

@@ -29,6 +29,10 @@ actually been checked. See `README.md` and `docs/V0_2_DESIGN.md`.
 
 `SOVEREIGN_EXECUTION_PROTOCOL.md` is the owner's default working style for every agent and workflow in this repository: execution first, verification alongside the work, minimal friction, risk-proportionate intervention, deliverables over commentary. Read it in full before starting. It applies unless the owner overrides it for a specific task; the security posture and protected data boundary below are its §4 boundaries made concrete.
 
+## Open-source reuse directive
+
+`OPEN_SOURCE_COMPLIANCE_PROTOCOL.md` is the owner's standing directive for researching and reusing open-source code: verify the license at a pinned upstream ref, prefer MIT / Apache-2.0 / BSD / ISC, treat GPL / AGPL / LGPL / MPL and unlicensed projects as ideas only, keep notices, and record every dependency and copied snippet in `third_party.json` and `THIRD_PARTY_NOTICES.md` (`scripts/check_third_party.py` enforces this in `scripts/verify.sh`). It supplements the execution protocol above; the security posture below still limits what may be adopted. Read it before adding a dependency, copying a snippet, or porting an idea from another project.
+
 ## Scope and authority
 
 1. Follow the owner's current explicit instruction.
