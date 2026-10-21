@@ -3,62 +3,85 @@
   "objective": "Add the portable verify/release pipeline and regression harness, adopt the open-source compliance policy, and harden package provenance (signer data, package states, detail view, ViewModel, edge-to-edge) without changing the security posture.",
   "branch": "claude/sovereign-execution-protocol-r676ri",
   "base_commit": "a8450b4690dac6a7ec24e8e263ad12a46b2e980d",
-  "head_commit": "9763934bd5fed3d8793ab52dca7f0e8e970f8768",
+  "head_commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441",
   "owner_agent": "claude (implementation agent, session 01PrmLBnLLWzJjH8rvT3kHac)",
   "claimed": [
-    "Gradle wrapper 8.9 with distributionSha256Sum committed",
-    "scripts/verify.sh, scripts/release.sh, scripts/bootstrap-android-sdk.sh, scripts/handoff.py, scripts/check_third_party.py",
-    "Robolectric + Roborazzi + ATF screenshot/accessibility harness with committed goldens (main screen)",
-    "lint abortOnError with committed baseline; CI calls scripts/verify.sh and scripts/release.sh",
-    "third_party.json and THIRD_PARTY_NOTICES.md for declared dependencies"
+    "Gradle wrapper 8.9 with distributionSha256Sum committed (jar matches Gradle's published checksum)",
+    "scripts/verify.sh, release.sh, bootstrap-android-sdk.sh, handoff.py, check_third_party.py; CI calls verify.sh and release.sh",
+    "Robolectric + Roborazzi + ATF harness: main and detail goldens at 320/411 dp x font 1.0/2.0 x light/dark, accessibility checks, synthetic-inset test",
+    "lint abortOnError with committed baseline (only the missing launcher icon remains)",
+    "Open-source compliance policy wired into AGENTS.md, CLAUDE.md and the session-start hook",
+    "Signer SHA-256 digests, rotation lineage, multi-signer, platform-signed check; FIRST_PARTY needs name + platform signature or pinned digest, else UNVERIFIED",
+    "Package states (updated system app, APEX, removed for user), install-source chain, SDK levels",
+    "ViewModel scan (no rescan on rotation), detail view, search, filter chips, edge-to-edge insets, strings to resources, epoch 0 shown as unknown, dataExtractionRules, tools:ignore for QUERY_ALL_PACKAGES",
+    "third_party.json and THIRD_PARTY_NOTICES.md cover direct, transitive runtime, test and build components and the Gradle wrapper; verify.sh checks the resolved APK classpath against them"
   ],
   "verified": [
     {
       "check": "test",
       "command": "./gradlew --no-daemon --max-workers=2 test",
       "result": "PASS",
-      "commit": "9763934bd5fed3d8793ab52dca7f0e8e970f8768"
+      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
     },
     {
       "check": "lint",
       "command": "./gradlew --no-daemon --max-workers=2 lintDebug",
       "result": "PASS",
-      "commit": "9763934bd5fed3d8793ab52dca7f0e8e970f8768"
+      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
     },
     {
       "check": "assembleDebug",
       "command": "./gradlew --no-daemon --max-workers=2 assembleDebug",
       "result": "PASS",
-      "commit": "9763934bd5fed3d8793ab52dca7f0e8e970f8768"
+      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
     },
     {
       "check": "third-party",
       "command": "python3 scripts/check_third_party.py",
       "result": "PASS",
-      "commit": "9763934bd5fed3d8793ab52dca7f0e8e970f8768"
+      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
+    },
+    {
+      "check": "runtime-deps",
+      "command": "./gradlew --no-daemon --max-workers=2 printRuntimeDependencies; check_third_party.py --resolved",
+      "result": "PASS",
+      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
+    },
+    {
+      "check": "handoff-schema",
+      "command": "python3 scripts/handoff.py validate",
+      "result": "PASS",
+      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
     },
     {
       "check": "diff-check",
       "command": "git diff --check; git show --check HEAD",
       "result": "PASS",
-      "commit": "9763934bd5fed3d8793ab52dca7f0e8e970f8768"
+      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
     }
   ],
   "not_run": [
-    "Real-device install and launch (no emulator or device available here); owner gate",
-    "Instrumented (androidTest) tests: none exist and no emulator",
-    "scripts/release.sh end-to-end signed build: no owner keystore (agents do not create keys); only the refusal path and --inspect-only checks were exercised",
-    "GitHub Actions run of the new build.yml: not triggered from this session"
+    "Real-device install and launch (no device or emulator here); the on-device gate in README.md is the owner's",
+    "Instrumented (androidTest) tests: none exist and there is no emulator",
+    "Behaviour of the R8-minified release APK on a device (it builds, and release.sh --inspect-only passes on a debug-key-signed copy, but nothing was run)",
+    "scripts/release.sh end-to-end with a real keystore: agents do not create keys, so only the unsigned refusal path and --inspect-only were exercised",
+    "GitHub Actions run of the new build.yml (not triggered from this session)",
+    "Real signature data from a device: signing info was exercised through Robolectric's ShadowSigningInfo, not a real PackageManager"
   ],
   "pending": [
-    "Open-source compliance policy file and AGENTS/CLAUDE/hook wiring",
-    "Signer data, package state flags, install-source chain, classifier rework",
-    "Detail view, search and filter chips, ViewModel, edge-to-edge insets, strings to resources",
-    "Final third_party.json covering resolved runtime transitive dependencies"
+    "Owner: pin release signing cert digests (release/signing-cert.sha256 and app/src/main/assets/first_party_pins.txt) after the first signed build; until then every first-party name shows UNVERIFIED",
+    "Owner: sideload the debug APK and re-run the README device gate (classification now needs pins)",
+    "Owner: decide PR #3 (adds INTERNET) and PR #7 (AGP bump that breaks CI); neither was touched",
+    "Optional: launcher icon (the only lint baseline entry)"
   ],
-  "artifacts": [],
-  "next_action": "Continue with the compliance policy commit, then the Step 3 feature commits; run scripts/verify.sh after each and push.",
-  "next_executor_hint": "coding-model",
+  "artifacts": [
+    {
+      "path": "app/build/outputs/apk/debug/app-debug.apk (local build output, not committed)",
+      "sha256": "22384787caadb0304999f24fc429a14a5caa2feaeb2c48ef94205e72cbca3f62"
+    }
+  ],
+  "next_action": "Owner tests the debug APK on the device, pins the signer digests after the first signed release, then merges the branch if satisfied.",
+  "next_executor_hint": "owner-device-test",
   "opened_at": "2026-10-20T23:06:28Z",
   "closed_at": null,
   "owner_interventions": 0
