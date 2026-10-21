@@ -1,0 +1,13 @@
+# Pinned signer digests for the owner's own apps, one `<package> <sha256>` per line.
+#
+# A package name alone proves nothing, so a first-party name classifies as
+# UNVERIFIED until its signing certificate is pinned here (or it is platform-signed).
+# The digest is the SHA-256 of the signing certificate, as printed by
+# `scripts/release.sh` (the "signer" line) or `apksigner verify --print-certs`.
+# Colons, spaces and upper case are accepted. Repeat a package to pin several
+# certificates (for example, across a planned key rotation).
+#
+# OWNER DECISION: add lines after the first signed build of each app. Agents do not
+# create or change signing keys, and do not invent digests.
+#
+# com.sovereignops.updateauditor <64 hex digits>

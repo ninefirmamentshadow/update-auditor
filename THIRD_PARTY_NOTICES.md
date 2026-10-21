@@ -39,6 +39,12 @@ Used to build the app. The Gradle wrapper jar is committed (`gradle/wrapper/grad
 | Roborazzi Gradle plugin | 1.46.1 | Apache-2.0 | https://github.com/takahirom/roborazzi |
 | Gradle wrapper | 8.9 | Apache-2.0 | https://github.com/gradle/gradle |
 
+## Informed by (no code or assets copied)
+
+These projects shaped ideas. Their code was not copied; the implementation here is independent.
+
+- **AppVerifier** (ISC), https://github.com/soupslurpr/AppVerifier. Informed reading signer certificates from PackageInfo.signingInfo and showing their SHA-256 digests, with multi-signer packages treated separately from a rotation lineage. Read at commit d39e32e; no code, assets or data were copied, and the implementation here (audit/SignerReader.kt, audit/CertDigest.kt) is independent. License read from https://github.com/soupslurpr/AppVerifier/blob/d39e32effd1ac2ef9d93d9669cd8b5e2a21cf6da/LICENSE.txt.
+
 ## Not redistributed
 
 Robolectric downloads Android framework jars (`android-all`, AOSP, Apache-2.0) at test time; they are cached outside the repository and are not committed or shipped.

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sovereignops.updateauditor.audit.DeviceAuditor
-import com.sovereignops.updateauditor.audit.PackageAuditor
+import com.sovereignops.updateauditor.audit.InventoryProvider
 import com.sovereignops.updateauditor.model.DeviceState
 import com.sovereignops.updateauditor.model.PackageOrigin
 import com.sovereignops.updateauditor.ui.PackageAdapter
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         executor.execute {
             runCatching {
                 val device = DeviceAuditor.read()
-                val packages = PackageAuditor(applicationContext).read()
+                val packages = InventoryProvider.sourceFor(applicationContext).readPackages()
                 device to packages
             }.onSuccess { (device, packages) ->
                 if (isFinishing || isDestroyed) return@onSuccess
@@ -63,8 +63,9 @@ class MainActivity : AppCompatActivity() {
                     val firstParty = packages.count { it.origin == PackageOrigin.FIRST_PARTY }
                     val system = packages.count { it.origin == PackageOrigin.SYSTEM }
                     val user = packages.count { it.origin == PackageOrigin.USER }
+                    val unverified = packages.count { it.origin == PackageOrigin.UNVERIFIED }
                     packageSummaryText.text =
-                        "Packages: ${packages.size} · first-party $firstParty · system $system · user $user"
+                        "Packages: ${packages.size} · first-party $firstParty · system $system · user $user · unverified $unverified"
                     statusText.text =
                         "Local observation complete. No network checks or update claims performed."
                     refreshButton.isEnabled = true

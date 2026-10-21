@@ -272,5 +272,15 @@
       "coordinates": []
     }
   ],
-  "informed_by": []
+  "informed_by": [
+    {
+      "name": "AppVerifier",
+      "upstream_url": "https://github.com/soupslurpr/AppVerifier",
+      "spdx": "ISC",
+      "license_verified_from": [
+        "https://github.com/soupslurpr/AppVerifier/blob/d39e32effd1ac2ef9d93d9669cd8b5e2a21cf6da/LICENSE.txt"
+      ],
+      "note": "Informed reading signer certificates from PackageInfo.signingInfo and showing their SHA-256 digests, with multi-signer packages treated separately from a rotation lineage. Read at commit d39e32e; no code, assets or data were copied, and the implementation here (audit/SignerReader.kt, audit/CertDigest.kt) is independent."
+    }
+  ]
 }
