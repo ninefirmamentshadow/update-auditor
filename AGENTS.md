@@ -74,6 +74,11 @@ owner explicitly provides a sanitized value for that specific output.
 - Prefer simple, auditable implementations and explicit failure handling.
 - Verdict logic must be deterministic and unit-testable without Android or a
   network. Providers return observations; a verdict engine decides policy.
+- A first-party package **name** is only a claim: FIRST_PARTY needs the platform
+  signature or a pinned signer digest. Pins are in
+  `app/src/main/assets/first_party_pins.txt` and are the owner's to add; never invent
+  or guess a digest, and never promote a name-only match to FIRST_PARTY.
+- Package inventory and signer digests are display-only: no copy, share or export action.
 - Never report success after a failed write, skipped validation, or a build
   that did not actually pass.
 - **Never publish a debug build as an operational release.** The signed release

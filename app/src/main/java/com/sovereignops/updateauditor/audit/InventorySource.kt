@@ -16,31 +16,35 @@ interface InventorySource {
     fun readPackage(packageName: String): PackageState?
 }
 
-/** Reads the local device. No network, no persistence, no export. */
-class LocalInventory(context: Context, pins: FirstPartyPins) : InventorySource {
-    private val auditor = PackageAuditor(context, pins)
+/**
+ * Reads the local device. No network, no persistence, no export. The pin file is read
+ * on first use, so it happens on the caller's (background) thread, not at construction.
+ */
+class LocalInventory(private val context: Context) : InventorySource {
+    private val auditor by lazy { PackageAuditor(context, loadPins(context)) }
 
     override fun readDevice(): DeviceState = DeviceAuditor.read()
     override fun readPackages(): List<PackageState> = auditor.read()
     override fun readPackage(packageName: String): PackageState? = auditor.read(packageName)
+
+    private companion object {
+        const val PINS_ASSET = "first_party_pins.txt"
+
+        /** A missing or unreadable pin file means no pins, so first-party names stay UNVERIFIED. */
+        fun loadPins(context: Context): FirstPartyPins = runCatching {
+            context.assets.open(PINS_ASSET).bufferedReader().use { FirstPartyPins.parse(it.readText()).pins }
+        }.getOrDefault(FirstPartyPins.NONE)
+    }
 }
 
 /** Single place the app asks for its [InventorySource]; tests override it. */
 object InventoryProvider {
-    private const val PINS_ASSET = "first_party_pins.txt"
-
     @Volatile
     @VisibleForTesting
     var override: ((Context) -> InventorySource)? = null
 
     fun sourceFor(context: Context): InventorySource {
         override?.let { return it(context) }
-        val app = context.applicationContext
-        return LocalInventory(app, loadPins(app))
+        return LocalInventory(context.applicationContext)
     }
-
-    /** A missing or unreadable pin file means no pins, so first-party names stay UNVERIFIED. */
-    private fun loadPins(context: Context): FirstPartyPins = runCatching {
-        context.assets.open(PINS_ASSET).bufferedReader().use { FirstPartyPins.parse(it.readText()).pins }
-    }.getOrDefault(FirstPartyPins.NONE)
 }

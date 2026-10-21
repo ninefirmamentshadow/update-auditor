@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <!--
+      Listing every installed package is this app's core local-audit function, so a
+      <queries> declaration cannot replace it. Used only to read local state; nothing
+      is sent anywhere (there is no INTERNET permission).
+    -->
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
 
     <application
         android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="false"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -19,6 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".PackageDetailActivity"
+            android:exported="false" />
 
     </application>
 

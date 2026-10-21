@@ -58,6 +58,60 @@
       "modified": false
     },
     {
+      "name": "AndroidX Activity KTX",
+      "upstream_url": "https://developer.android.com/jetpack/androidx/releases/activity",
+      "version_or_commit": "1.9.3",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/activity/activity-ktx/1.9.3/activity-ktx-1.9.3.pom"
+      ],
+      "files": [
+        "(dependency; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.activity:activity-ktx"
+      ],
+      "modified": false
+    },
+    {
+      "name": "AndroidX Lifecycle ViewModel KTX",
+      "upstream_url": "https://developer.android.com/jetpack/androidx/releases/lifecycle",
+      "version_or_commit": "2.8.7",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-viewmodel-ktx/2.8.7/lifecycle-viewmodel-ktx-2.8.7.pom"
+      ],
+      "files": [
+        "(dependency; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.lifecycle:lifecycle-viewmodel-ktx"
+      ],
+      "modified": false
+    },
+    {
+      "name": "AndroidX Lifecycle Runtime KTX",
+      "upstream_url": "https://developer.android.com/jetpack/androidx/releases/lifecycle",
+      "version_or_commit": "2.8.7",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-runtime-ktx/2.8.7/lifecycle-runtime-ktx-2.8.7.pom"
+      ],
+      "files": [
+        "(dependency; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.lifecycle:lifecycle-runtime-ktx"
+      ],
+      "modified": false
+    },
+    {
       "name": "JUnit 4",
       "upstream_url": "https://github.com/junit-team/junit4",
       "version_or_commit": "4.13.2",
@@ -281,6 +335,15 @@
         "https://github.com/soupslurpr/AppVerifier/blob/d39e32effd1ac2ef9d93d9669cd8b5e2a21cf6da/LICENSE.txt"
       ],
       "note": "Informed reading signer certificates from PackageInfo.signingInfo and showing their SHA-256 digests, with multi-signer packages treated separately from a rotation lineage. Read at commit d39e32e; no code, assets or data were copied, and the implementation here (audit/SignerReader.kt, audit/CertDigest.kt) is independent."
+    },
+    {
+      "name": "LibChecker",
+      "upstream_url": "https://github.com/LibChecker/LibChecker",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://github.com/LibChecker/LibChecker/blob/0aff6d8483c308abdbaae8d9fc1e6ddf3129af25/LICENSE"
+      ],
+      "note": "Informed the idea of a per-package detail screen with a searchable, filterable package list. Only the product idea was used; no code, assets or data were copied, and the layouts and code here are independent."
     }
   ]
 }

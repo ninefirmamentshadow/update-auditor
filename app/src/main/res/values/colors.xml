@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Filter chips. Text on each fill is at least 7:1. -->
+    <color name="chip_fill_checked">#1F4E79</color>
+    <color name="chip_text_checked">#FFFFFF</color>
+    <color name="chip_stroke">#5F6368</color>
+</resources>

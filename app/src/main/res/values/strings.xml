@@ -1,5 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Update Auditor</string>
-    <string name="refresh">Refresh local state</string>
+
+    <!-- Main screen -->
+    <string name="refresh">Refresh</string>
+    <string name="refresh_description">Refresh local state</string>
+    <string name="search_hint">Search apps or package names</string>
+    <string name="filter_group_description">Filter packages</string>
+    <string name="filter_all">All</string>
+    <string name="filter_first_party">First-party</string>
+    <string name="filter_system">System</string>
+    <string name="filter_updated_system">Updated system</string>
+    <string name="filter_user">User</string>
+    <string name="filter_unverified">Unverified</string>
+    <string name="filter_sideloaded">Sideloaded</string>
+    <string name="status_scanning">Scanning local device state…</string>
+    <string name="status_done">Local observation complete. No network checks or update claims performed.</string>
+    <string name="status_failed">Audit failed locally: %1$s</string>
+    <string name="summary_counts">Packages %1$d · first-party %2$d · system %3$d · user %4$d · unverified %5$d</string>
+    <string name="summary_showing">Showing %1$d of %2$d</string>
+    <string name="empty_no_match">No packages match.</string>
+    <string name="empty_no_packages">No packages were reported.</string>
+
+    <!-- Device card -->
+    <string name="device_title">%1$s %2$s</string>
+    <string name="device_label_device">device</string>
+    <string name="device_label_product">product</string>
+    <string name="device_label_android">Android</string>
+    <string name="device_label_patch">patch</string>
+    <string name="device_label_build">build</string>
+    <string name="device_label_baseband">baseband</string>
+    <string name="device_label_fingerprint">fingerprint</string>
+    <string name="device_android_value">%1$s (SDK %2$d)</string>
+    <string name="device_unavailable">Unavailable</string>
+
+    <!-- Origins -->
+    <string name="origin_first_party">FIRST PARTY</string>
+    <string name="origin_system">SYSTEM</string>
+    <string name="origin_user">USER</string>
+    <string name="origin_unverified">UNVERIFIED</string>
+    <string name="origin_first_party_detail">Matches a first-party app name, and its signer is verified: it carries the platform signature or a pinned signer digest.</string>
+    <string name="origin_unverified_detail">The package name matches a first-party app, but neither the platform signature nor a pinned signer digest verifies it. This is missing evidence, not a statement about updates.</string>
+    <string name="origin_system_detail">Part of the device\'s system image or a Mainline module.</string>
+    <string name="origin_user_detail">Installed by or for the user.</string>
+
+    <!-- Package rows -->
+    <string name="row_title">%1$s · %2$s</string>
+    <string name="row_version">v%1$s (%2$d)</string>
+    <string name="row_version_unknown">v? (%1$d)</string>
+    <string name="flag_enabled">enabled</string>
+    <string name="flag_disabled">disabled</string>
+    <string name="flag_debuggable">debuggable</string>
+    <string name="flag_system">system</string>
+    <string name="flag_updated_system">updated system app</string>
+    <string name="flag_apex">Mainline module</string>
+    <string name="flag_removed">removed for this user</string>
+    <string name="row_signed">signed: %1$s</string>
+    <string name="row_installer">installer: %1$s</string>
+    <string name="row_dates">installed: %1$s · updated: %2$s</string>
+    <string name="value_unknown">unknown</string>
+    <string name="value_not_exposed">none recorded or not exposed to this app</string>
+    <string name="value_yes">yes</string>
+    <string name="value_no">no</string>
+    <string name="signed_platform">platform key</string>
+    <string name="signed_single">1 certificate</string>
+    <string name="signed_rotated">1 certificate, key rotated</string>
+    <string name="signed_multiple">multiple signers</string>
+    <string name="signed_unavailable">not exposed</string>
+
+    <!-- Detail screen -->
+    <string name="detail_back">Back to list</string>
+    <string name="detail_loading">Reading package…</string>
+    <string name="detail_not_found">This package is no longer installed.</string>
+    <string name="detail_error">Could not read this package: %1$s</string>
+    <string name="detail_section_identity">Identity</string>
+    <string name="detail_section_classification">Classification</string>
+    <string name="detail_section_signing">Signing</string>
+    <string name="detail_section_install_source">Install source</string>
+    <string name="detail_section_flags">State</string>
+    <string name="detail_section_sdk">SDK levels</string>
+    <string name="detail_section_dates">Dates</string>
+    <string name="detail_package_name">Package</string>
+    <string name="detail_version">Version</string>
+    <string name="detail_origin">Origin</string>
+    <string name="detail_why">Why</string>
+    <string name="detail_signing_summary">Signed</string>
+    <string name="detail_platform_signed">Platform-signed</string>
+    <string name="detail_multiple_signers">Multiple signers</string>
+    <string name="detail_rotated">Key rotation lineage</string>
+    <string name="detail_current_signer">Current signer %1$d SHA-256</string>
+    <string name="detail_past_signer">Earlier signer %1$d SHA-256</string>
+    <string name="detail_no_signer">No signing certificate was exposed for this package.</string>
+    <string name="detail_installer">Installer</string>
+    <string name="detail_initiating">Initiated by</string>
+    <string name="detail_originating">Originating app</string>
+    <string name="detail_update_owner">Update owner</string>
+    <string name="detail_package_source">Package source</string>
+    <string name="detail_enabled">Enabled</string>
+    <string name="detail_debuggable">Debuggable</string>
+    <string name="detail_system">System package</string>
+    <string name="detail_updated_system">Updated system app</string>
+    <string name="detail_apex">Mainline (APEX) module</string>
+    <string name="detail_removed">Removed for this user</string>
+    <string name="detail_sideloaded">Outside a recorded installer</string>
+    <string name="detail_min_sdk">Minimum</string>
+    <string name="detail_target_sdk">Target</string>
+    <string name="detail_compile_sdk">Compiled against</string>
+    <string name="detail_first_install">First installed</string>
+    <string name="detail_last_update">Last updated</string>
+    <string name="source_unavailable">not available on this Android version</string>
+    <string name="source_unspecified">unspecified</string>
+    <string name="source_other">other</string>
+    <string name="source_store">store</string>
+    <string name="source_local_file">local file</string>
+    <string name="source_downloaded_file">downloaded file</string>
 </resources>

@@ -2,9 +2,9 @@
 
 A read-only Android device-state and package-provenance auditor for a mobile-first workflow.
 
-## v0.1 scope
+## What it reports
 
-This first milestone intentionally reports **local observations only**. It does not claim that the device, firmware, or any installed app is current unless an upstream source has actually been checked.
+This milestone reports **local observations only**. It does not claim that the device, firmware, or any installed app is current unless an upstream source has actually been checked.
 
 The app currently reads:
 
@@ -15,10 +15,20 @@ The app currently reads:
 - baseband/radio version where Android exposes it
 - installed package label and package name
 - version name and version code
-- first-install and last-update timestamps
-- enabled, debuggable and system-app flags
-- installer-of-record where Android exposes it
-- local provenance classification: FIRST PARTY, SYSTEM, or USER
+- first-install and last-update timestamps (shown as "unknown" when Android reports none)
+- enabled, debuggable and system-app flags, plus updated-system-app, Mainline (APEX) module and removed-for-this-user states
+- signing certificates: SHA-256 of each current signer, key-rotation lineage, multiple signers, and whether the package carries the platform's own signature
+- install source where Android exposes it: installer, initiating app, originating app, update owner and package source
+- SDK levels: minimum, target and compiled-against
+- local provenance classification: FIRST PARTY, SYSTEM, USER, or UNVERIFIED
+
+Tap a package for its detail page. The list has a search box and exclusive filter chips (all, first-party, system, updated system, user, unverified, sideloaded). Nothing can be copied or exported from either screen.
+
+### First-party verification
+
+A package **name** proves nothing, since anyone can ship that name. A package is classified FIRST PARTY only when its name matches a known first-party app **and** it carries the platform signature or its signing certificate is pinned. A name match without either is UNVERIFIED: missing evidence, never an "outdated" claim.
+
+Pins live in `app/src/main/assets/first_party_pins.txt`, one `<package> <sha256>` per line, owner-maintained and empty until the owner pins them after the first signed build. `scripts/release.sh` prints the signer digest to pin. Until then every first-party name shows as UNVERIFIED, which is the safe default.
 
 Known first-party packages include Clock Tools, Drafts, Field Watch, Ledger, and Update Auditor, including their debug variants.
 
@@ -26,10 +36,10 @@ Known first-party packages include Clock Tools, Drafts, Field Watch, Ledger, and
 
 - No `INTERNET` permission.
 - No telemetry, analytics, account, VPN, accessibility service, device-admin capability, updater, installer, or package mutation path.
-- Backups are disabled.
+- Backups and device-to-device transfer are disabled (`allowBackup=false` and data-extraction rules that exclude everything).
 - Cleartext traffic is disabled.
 - `QUERY_ALL_PACKAGES` is declared because installed-package inventory is the app's core local-audit function.
-- Package inventory is displayed locally and is not exported by v0.1.
+- Package inventory is displayed locally and is not exported, copied or shared.
 
 `UNKNOWN` and `UNVERIFIED` are not synonyms for `OUTDATED`. Upstream version comparison, Samsung OTA status, Play/Galaxy Store status, APEX/Mainline inspection, signer continuity, snapshots/deltas, and Shizuku-enhanced inspection are later milestones.
 
@@ -86,7 +96,7 @@ source of truth.
 
 ## v0.1 device gate
 
-**Passed 2026-08-07 on the target Samsung SM-A166U.**
+**Passed 2026-08-07 on the target Samsung SM-A166U** (before signer verification, the detail view and the other changes since; those have not been re-run on a device).
 
 Validated on-device:
 

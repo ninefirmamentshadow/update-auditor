@@ -13,6 +13,9 @@ Compiled into the release APK. Apache-2.0 requires the license text to accompany
 | AndroidX Core KTX | 1.13.1 | Apache-2.0 | https://developer.android.com/jetpack/androidx/releases/core |
 | AndroidX AppCompat | 1.7.0 | Apache-2.0 | https://developer.android.com/jetpack/androidx/releases/appcompat |
 | AndroidX RecyclerView | 1.3.2 | Apache-2.0 | https://developer.android.com/jetpack/androidx/releases/recyclerview |
+| AndroidX Activity KTX | 1.9.3 | Apache-2.0 | https://developer.android.com/jetpack/androidx/releases/activity |
+| AndroidX Lifecycle ViewModel KTX | 2.8.7 | Apache-2.0 | https://developer.android.com/jetpack/androidx/releases/lifecycle |
+| AndroidX Lifecycle Runtime KTX | 2.8.7 | Apache-2.0 | https://developer.android.com/jetpack/androidx/releases/lifecycle |
 
 ## Test harness (never shipped)
 
@@ -44,6 +47,7 @@ Used to build the app. The Gradle wrapper jar is committed (`gradle/wrapper/grad
 These projects shaped ideas. Their code was not copied; the implementation here is independent.
 
 - **AppVerifier** (ISC), https://github.com/soupslurpr/AppVerifier. Informed reading signer certificates from PackageInfo.signingInfo and showing their SHA-256 digests, with multi-signer packages treated separately from a rotation lineage. Read at commit d39e32e; no code, assets or data were copied, and the implementation here (audit/SignerReader.kt, audit/CertDigest.kt) is independent. License read from https://github.com/soupslurpr/AppVerifier/blob/d39e32effd1ac2ef9d93d9669cd8b5e2a21cf6da/LICENSE.txt.
+- **LibChecker** (Apache-2.0), https://github.com/LibChecker/LibChecker. Informed the idea of a per-package detail screen with a searchable, filterable package list. Only the product idea was used; no code, assets or data were copied, and the layouts and code here are independent. License read from https://github.com/LibChecker/LibChecker/blob/0aff6d8483c308abdbaae8d9fc1e6ddf3129af25/LICENSE.
 
 ## Not redistributed
 

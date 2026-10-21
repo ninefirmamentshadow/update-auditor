@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="chip_fill_checked">#8AB4F8</color>
+    <color name="chip_text_checked">#0B1F33</color>
+    <color name="chip_stroke">#9AA0A6</color>
+</resources>
