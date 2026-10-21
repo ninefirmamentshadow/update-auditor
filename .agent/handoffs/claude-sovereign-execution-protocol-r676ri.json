@@ -3,7 +3,7 @@
   "objective": "Add the portable verify/release pipeline and regression harness, adopt the open-source compliance policy, and harden package provenance (signer data, package states, detail view, ViewModel, edge-to-edge) without changing the security posture.",
   "branch": "claude/sovereign-execution-protocol-r676ri",
   "base_commit": "a8450b4690dac6a7ec24e8e263ad12a46b2e980d",
-  "head_commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441",
+  "head_commit": "3c681ee605e5641e4e3a8be9a97065a57a6dcf9c",
   "owner_agent": "claude (implementation agent, session 01PrmLBnLLWzJjH8rvT3kHac)",
   "claimed": [
     "Gradle wrapper 8.9 with distributionSha256Sum committed (jar matches Gradle's published checksum)",
@@ -21,43 +21,43 @@
       "check": "test",
       "command": "./gradlew --no-daemon --max-workers=2 test",
       "result": "PASS",
-      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
+      "commit": "3c681ee605e5641e4e3a8be9a97065a57a6dcf9c"
     },
     {
       "check": "lint",
       "command": "./gradlew --no-daemon --max-workers=2 lintDebug",
       "result": "PASS",
-      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
+      "commit": "3c681ee605e5641e4e3a8be9a97065a57a6dcf9c"
     },
     {
       "check": "assembleDebug",
       "command": "./gradlew --no-daemon --max-workers=2 assembleDebug",
       "result": "PASS",
-      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
+      "commit": "3c681ee605e5641e4e3a8be9a97065a57a6dcf9c"
     },
     {
       "check": "third-party",
       "command": "python3 scripts/check_third_party.py",
       "result": "PASS",
-      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
+      "commit": "3c681ee605e5641e4e3a8be9a97065a57a6dcf9c"
     },
     {
       "check": "runtime-deps",
       "command": "./gradlew --no-daemon --max-workers=2 printRuntimeDependencies; check_third_party.py --resolved",
       "result": "PASS",
-      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
+      "commit": "3c681ee605e5641e4e3a8be9a97065a57a6dcf9c"
     },
     {
       "check": "handoff-schema",
       "command": "python3 scripts/handoff.py validate",
       "result": "PASS",
-      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
+      "commit": "3c681ee605e5641e4e3a8be9a97065a57a6dcf9c"
     },
     {
       "check": "diff-check",
       "command": "git diff --check; git show --check HEAD",
       "result": "PASS",
-      "commit": "74b025ae3882244aafe9b0e00220ebe6dc1c2441"
+      "commit": "3c681ee605e5641e4e3a8be9a97065a57a6dcf9c"
     }
   ],
   "not_run": [
