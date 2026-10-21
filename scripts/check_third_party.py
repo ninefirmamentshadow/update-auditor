@@ -9,12 +9,16 @@ Checks (stdlib only, Python 3.11+):
     only, which is never shipped);
   * every component and "informed by" project is named in THIRD_PARTY_NOTICES.md;
   * the committed Gradle wrapper jar still has the checksum recorded for it, and
-    gradle-wrapper.properties pins the distribution checksum.
+    gradle-wrapper.properties pins the distribution checksum;
+  * with --resolved FILE (the `group:name:version` lines written by
+    `./gradlew printRuntimeDependencies`), every module that actually ships in the
+    APK, transitive ones included, is in third_party.json at the resolved version.
 
 It reads files only. Exit 0 = covered, 1 = something is missing or inconsistent.
 """
 import hashlib
 import json
+import argparse
 import os
 import re
 import sys
@@ -64,6 +68,9 @@ def declared_from_toml():
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--resolved", metavar="FILE", help="resolved runtime modules, one group:name:version per line")
+    args = parser.parse_args()
     errors = []
     try:
         inventory = load_json("third_party.json")
@@ -112,6 +119,25 @@ def main():
             errors.append("%s: libs.versions.toml pins %s but third_party.json records %s"
                           % (coordinate, version, [m.get("version_or_commit") for m in matches]))
 
+    resolved_count = None
+    if args.resolved:
+        resolved_count = 0
+        try:
+            with open(args.resolved, encoding="utf-8") as handle:
+                lines = [line.strip() for line in handle if line.strip()]
+        except OSError as exc:
+            lines = []
+            errors.append("cannot read resolved dependency list: %s" % exc)
+        for line in lines:
+            resolved_count += 1
+            coordinate, _, version = line.rpartition(":")
+            matches = [c for c in by_coordinate.get(coordinate, []) if c.get("scope") == "runtime"]
+            if not matches:
+                errors.append("shipped runtime module %s is not in third_party.json (scope runtime)" % line)
+            elif not any(str(c.get("version_or_commit")) == version for c in matches):
+                errors.append("shipped runtime module %s resolves to %s but third_party.json records %s"
+                              % (coordinate, version, [c.get("version_or_commit") for c in matches]))
+
     notices_path = os.path.join(ROOT, "THIRD_PARTY_NOTICES.md")
     try:
         with open(notices_path, encoding="utf-8") as handle:
@@ -152,8 +178,9 @@ def main():
         for err in errors:
             print("  - " + err)
         return 1
-    print("third-party inventory ok: %d components, %d declared Gradle entries covered, %d informed-by"
-          % (len(components), checked, len(informed_by)))
+    extra = ", %d shipped runtime modules covered" % resolved_count if resolved_count is not None else ""
+    print("third-party inventory ok: %d components, %d declared Gradle entries covered, %d informed-by%s"
+          % (len(components), checked, len(informed_by), extra))
     return 0
 
 

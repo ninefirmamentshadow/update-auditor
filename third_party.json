@@ -324,6 +324,572 @@
       "sha256": "498495120a03b9a6ab5d155f5de3c8f0d986a449153702fb80fc80e134484f17",
       "modified": false,
       "coordinates": []
+    },
+    {
+      "name": "androidx.activity 1.9.3 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.9.3",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/activity/activity/1.9.3/activity-1.9.3.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.activity:activity"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.annotation 1.4.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.4.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/annotation/annotation-experimental/1.4.0/annotation-experimental-1.4.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.annotation:annotation-experimental"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.annotation 1.8.1 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.8.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/annotation/annotation-jvm/1.8.1/annotation-jvm-1.8.1.pom",
+        "https://dl.google.com/android/maven2/androidx/annotation/annotation/1.8.1/annotation-1.8.1.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.annotation:annotation-jvm",
+        "androidx.annotation:annotation"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.appcompat 1.7.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.7.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/appcompat/appcompat-resources/1.7.0/appcompat-resources-1.7.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.appcompat:appcompat-resources"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.arch.core 2.2.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "2.2.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/arch/core/core-common/2.2.0/core-common-2.2.0.pom",
+        "https://dl.google.com/android/maven2/androidx/arch/core/core-runtime/2.2.0/core-runtime-2.2.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.arch.core:core-common",
+        "androidx.arch.core:core-runtime"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.collection 1.1.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.1.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/collection/collection/1.1.0/collection-1.1.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.collection:collection"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.concurrent 1.1.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.1.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/concurrent/concurrent-futures/1.1.0/concurrent-futures-1.1.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.concurrent:concurrent-futures"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.core 1.13.1 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.13.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/core/core/1.13.1/core-1.13.1.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.core:core"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.cursoradapter 1.0.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.0.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/cursoradapter/cursoradapter/1.0.0/cursoradapter-1.0.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.cursoradapter:cursoradapter"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.customview 1.0.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.0.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/customview/customview-poolingcontainer/1.0.0/customview-poolingcontainer-1.0.0.pom",
+        "https://dl.google.com/android/maven2/androidx/customview/customview/1.0.0/customview-1.0.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.customview:customview-poolingcontainer",
+        "androidx.customview:customview"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.drawerlayout 1.0.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.0.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/drawerlayout/drawerlayout/1.0.0/drawerlayout-1.0.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.drawerlayout:drawerlayout"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.emoji2 1.3.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.3.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/emoji2/emoji2-views-helper/1.3.0/emoji2-views-helper-1.3.0.pom",
+        "https://dl.google.com/android/maven2/androidx/emoji2/emoji2/1.3.0/emoji2-1.3.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.emoji2:emoji2-views-helper",
+        "androidx.emoji2:emoji2"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.fragment 1.5.4 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.5.4",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/fragment/fragment/1.5.4/fragment-1.5.4.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.fragment:fragment"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.interpolator 1.0.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.0.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/interpolator/interpolator/1.0.0/interpolator-1.0.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.interpolator:interpolator"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.lifecycle 2.8.7 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "2.8.7",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-common-jvm/2.8.7/lifecycle-common-jvm-2.8.7.pom",
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-common/2.8.7/lifecycle-common-2.8.7.pom",
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-livedata-core-ktx/2.8.7/lifecycle-livedata-core-ktx-2.8.7.pom",
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-livedata-core/2.8.7/lifecycle-livedata-core-2.8.7.pom",
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-livedata/2.8.7/lifecycle-livedata-2.8.7.pom",
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-process/2.8.7/lifecycle-process-2.8.7.pom",
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-runtime-android/2.8.7/lifecycle-runtime-android-2.8.7.pom",
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-runtime-ktx-android/2.8.7/lifecycle-runtime-ktx-android-2.8.7.pom",
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-runtime/2.8.7/lifecycle-runtime-2.8.7.pom",
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-viewmodel-android/2.8.7/lifecycle-viewmodel-android-2.8.7.pom",
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-viewmodel-savedstate/2.8.7/lifecycle-viewmodel-savedstate-2.8.7.pom",
+        "https://dl.google.com/android/maven2/androidx/lifecycle/lifecycle-viewmodel/2.8.7/lifecycle-viewmodel-2.8.7.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.lifecycle:lifecycle-common-jvm",
+        "androidx.lifecycle:lifecycle-common",
+        "androidx.lifecycle:lifecycle-livedata-core-ktx",
+        "androidx.lifecycle:lifecycle-livedata-core",
+        "androidx.lifecycle:lifecycle-livedata",
+        "androidx.lifecycle:lifecycle-process",
+        "androidx.lifecycle:lifecycle-runtime-android",
+        "androidx.lifecycle:lifecycle-runtime-ktx-android",
+        "androidx.lifecycle:lifecycle-runtime",
+        "androidx.lifecycle:lifecycle-viewmodel-android",
+        "androidx.lifecycle:lifecycle-viewmodel-savedstate",
+        "androidx.lifecycle:lifecycle-viewmodel"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.loader 1.0.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.0.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/loader/loader/1.0.0/loader-1.0.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.loader:loader"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.profileinstaller 1.3.1 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.3.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/profileinstaller/profileinstaller/1.3.1/profileinstaller-1.3.1.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.profileinstaller:profileinstaller"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.resourceinspection 1.0.1 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.0.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/resourceinspection/resourceinspection-annotation/1.0.1/resourceinspection-annotation-1.0.1.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.resourceinspection:resourceinspection-annotation"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.savedstate 1.2.1 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.2.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/savedstate/savedstate-ktx/1.2.1/savedstate-ktx-1.2.1.pom",
+        "https://dl.google.com/android/maven2/androidx/savedstate/savedstate/1.2.1/savedstate-1.2.1.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.savedstate:savedstate-ktx",
+        "androidx.savedstate:savedstate"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.startup 1.1.1 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.1.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/startup/startup-runtime/1.1.1/startup-runtime-1.1.1.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.startup:startup-runtime"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.tracing 1.0.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.0.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/tracing/tracing/1.0.0/tracing-1.0.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.tracing:tracing"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.vectordrawable 1.1.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.1.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/vectordrawable/vectordrawable-animated/1.1.0/vectordrawable-animated-1.1.0.pom",
+        "https://dl.google.com/android/maven2/androidx/vectordrawable/vectordrawable/1.1.0/vectordrawable-1.1.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.vectordrawable:vectordrawable-animated",
+        "androidx.vectordrawable:vectordrawable"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.versionedparcelable 1.1.1 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.1.1",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/versionedparcelable/versionedparcelable/1.1.1/versionedparcelable-1.1.1.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.versionedparcelable:versionedparcelable"
+      ],
+      "modified": false
+    },
+    {
+      "name": "androidx.viewpager 1.0.0 (transitive)",
+      "upstream_url": "https://developer.android.com/jetpack/androidx",
+      "version_or_commit": "1.0.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://dl.google.com/android/maven2/androidx/viewpager/viewpager/1.0.0/viewpager-1.0.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "androidx.viewpager:viewpager"
+      ],
+      "modified": false
+    },
+    {
+      "name": "com.google.guava 1.0 (transitive)",
+      "upstream_url": "https://github.com/google/guava",
+      "version_or_commit": "1.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/26.0-android/guava-parent-26.0-android.pom (parent of listenablefuture 1.0, which declares no license of its own)"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "com.google.guava:listenablefuture"
+      ],
+      "modified": false
+    },
+    {
+      "name": "org.jetbrains 23.0.0 (transitive)",
+      "upstream_url": "https://github.com/JetBrains/java-annotations",
+      "version_or_commit": "23.0.0",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "org.jetbrains:annotations"
+      ],
+      "modified": false
+    },
+    {
+      "name": "org.jetbrains.kotlin 1.8.20 (transitive)",
+      "upstream_url": "https://github.com/JetBrains/kotlin",
+      "version_or_commit": "1.8.20",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.8.20/kotlin-stdlib-jdk7-1.8.20.pom",
+        "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.8.20/kotlin-stdlib-jdk8-1.8.20.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "org.jetbrains.kotlin:kotlin-stdlib-jdk7",
+        "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+      ],
+      "modified": false
+    },
+    {
+      "name": "org.jetbrains.kotlin 2.0.21 (transitive)",
+      "upstream_url": "https://github.com/JetBrains/kotlin",
+      "version_or_commit": "2.0.21",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-common/2.0.21/kotlin-stdlib-common-2.0.21.pom",
+        "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.0.21/kotlin-stdlib-2.0.21.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "org.jetbrains.kotlin:kotlin-stdlib-common",
+        "org.jetbrains.kotlin:kotlin-stdlib"
+      ],
+      "modified": false
+    },
+    {
+      "name": "org.jetbrains.kotlinx 1.7.3 (transitive)",
+      "upstream_url": "https://github.com/Kotlin/kotlinx.coroutines",
+      "version_or_commit": "1.7.3",
+      "spdx": "Apache-2.0",
+      "license_verified_from": [
+        "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.7.3/kotlinx-coroutines-android-1.7.3.pom",
+        "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-bom/1.7.3/kotlinx-coroutines-bom-1.7.3.pom",
+        "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.7.3/kotlinx-coroutines-core-jvm-1.7.3.pom",
+        "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.7.3/kotlinx-coroutines-core-1.7.3.pom"
+      ],
+      "files": [
+        "(dependency of the app's direct dependencies; compiled into the APK)"
+      ],
+      "notices_required": "Apache-2.0 license text must accompany redistribution (APK); no NOTICE file in the artifact. Jar listings of these artifacts contain no NOTICE file.",
+      "scope": "runtime",
+      "coordinates": [
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android",
+        "org.jetbrains.kotlinx:kotlinx-coroutines-bom",
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm",
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core"
+      ],
+      "modified": false
     }
   ],
   "informed_by": [

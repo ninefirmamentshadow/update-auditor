@@ -116,12 +116,19 @@ run_step() { # name blocked-reason display command...
 gw() { ./gradlew "${GRADLE_ARGS[@]}" "$@"; }
 GW_SHOWN="./gradlew ${GRADLE_ARGS[*]}"
 
+# Every module that ships in the APK, transitive ones included, must be inventoried.
+runtime_inventory() {
+    gw -q printRuntimeDependencies > /dev/null &&
+        python3 scripts/check_third_party.py --resolved app/build/runtime-dependencies.txt
+}
+
 echo "verify: HEAD $SHORT_SHA on $BRANCH, tree $TREE_NOTE"
 
 run_step test          "$NO_GRADLE_REASON" "$GW_SHOWN test"          gw test
 run_step lint          "$NO_GRADLE_REASON" "$GW_SHOWN lintDebug"     gw lintDebug
 run_step assembleDebug "$NO_GRADLE_REASON" "$GW_SHOWN assembleDebug" gw assembleDebug
 run_step third-party   "$NO_PYTHON_REASON" "python3 scripts/check_third_party.py" python3 scripts/check_third_party.py
+run_step runtime-deps  "${NO_GRADLE_REASON:-$NO_PYTHON_REASON}" "$GW_SHOWN printRuntimeDependencies; check_third_party.py --resolved" runtime_inventory
 if ls .agent/handoffs/*.json >/dev/null 2>&1; then
     run_step handoff-schema "$NO_PYTHON_REASON" "python3 scripts/handoff.py validate" python3 scripts/handoff.py validate
 fi

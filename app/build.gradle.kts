@@ -36,6 +36,27 @@ val releaseStoreFile: String? =
     (keystoreProperties.getProperty("storeFile") ?: System.getenv("KEYSTORE_FILE"))
         ?.takeIf { it.isNotBlank() && rootProject.file(it).exists() }
 
+// Writes every resolved module of the shipping (release runtime) classpath as
+// `group:name:version`, one per line, to build/runtime-dependencies.txt.
+// scripts/verify.sh feeds it to scripts/check_third_party.py so a transitive
+// dependency that appears in the APK without being inventoried fails the build.
+tasks.register("printRuntimeDependencies") {
+    val output = layout.buildDirectory.file("runtime-dependencies.txt")
+    doLast {
+        val modules = project.configurations.getByName("releaseRuntimeClasspath")
+            .incoming.resolutionResult.allComponents
+            .filter { it.id is org.gradle.api.artifacts.component.ModuleComponentIdentifier }
+            .mapNotNull { it.moduleVersion }
+            .map { "${it.group}:${it.name}:${it.version}" }
+            .toSortedSet()
+        output.get().asFile.apply {
+            parentFile.mkdirs()
+            writeText(modules.joinToString("\n", postfix = "\n"))
+        }
+        println("wrote ${modules.size} runtime modules to ${output.get().asFile}")
+    }
+}
+
 android {
     namespace = "com.sovereignops.updateauditor"
     compileSdk = 35
