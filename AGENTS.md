@@ -17,8 +17,8 @@ actually been checked. See `README.md` and `docs/V0_2_DESIGN.md`.
 - `docs/` — design notes. A design document does not by itself authorize its
   own implementation; the owner's current instruction does.
 - `scripts/` — the portable pipeline: `verify.sh` (tests, screenshot goldens,
-  lint, debug build, third-party inventory, whitespace; PASS/FAIL/NOT_RUN with the
-  HEAD sha), `release.sh`, `bootstrap-android-sdk.sh`, `check_third_party.py`,
+  lint, debug build, third-party inventory including every module that resolves into
+  the APK, whitespace; PASS/FAIL/NOT_RUN with the HEAD sha), `release.sh`, `bootstrap-android-sdk.sh`, `check_third_party.py`,
   `handoff.py`. CI and agents run the same scripts.
 - `.agent/` — the branch handoff schema and one handoff file per active branch.
 - `third_party.json`, `THIRD_PARTY_NOTICES.md`, `licenses/` — the component inventory.
@@ -89,7 +89,7 @@ owner explicitly provides a sanitized value for that specific output.
 
 ```bash
 scripts/verify.sh              # test (incl. screenshot goldens), lintDebug, assembleDebug,
-                               # third-party inventory, git diff --check
+                               # third-party inventory (declared + resolved), git diff --check
 scripts/verify.sh --handoff    # same, and record results in .agent/handoffs/<branch>.json
 scripts/release.sh             # signed release only; refuses unsigned/debuggable output
 ./gradlew recordRoborazziDebug # re-record screenshot goldens after an intended UI change

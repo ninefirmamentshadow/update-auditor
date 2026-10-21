@@ -145,6 +145,9 @@ else
     echo "  echo $CERT_SHA256 > $PIN_FILE"
     echo "and commits that file after checking the digest is the owner's own key."
 fi
+echo "release: to let the app verify itself as first-party, the owner adds this line to"
+echo "  app/src/main/assets/first_party_pins.txt:"
+echo "  $APP_ID $CERT_SHA256"
 
 if [ -n "$INSPECT_ONLY" ]; then
     echo "inspect-only: $APK passed the APK checks (id $badge_id, signer $CERT_SHA256, pin: $pin_status)."
