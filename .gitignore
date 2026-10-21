@@ -12,3 +12,5 @@ keystore.properties
 release/*.apk
 release/release-manifest.json
 release/changelog.md
+__pycache__/
+*.pyc
