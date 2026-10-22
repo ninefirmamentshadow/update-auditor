@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">Update Auditor</string>
     <string name="refresh">Refresh local state</string>
+    <string name="check_samsung">Check Samsung</string>
+    <string name="open_system_update">Open system updater</string>
 </resources>
