@@ -7,3 +7,7 @@ Pointer file. Update Auditor is a read-only Android device-state and package-pro
 Standing operating directive referenced by AGENTS.md:
 
 @SOVEREIGN_EXECUTION_PROTOCOL.md
+
+Owner's operating directive for Claude Code sessions (every push, PR, merge, deployment or destructive action waits for the owner's explicit approval; hooks are not approval):
+
+@SOVEREIGN_ACCELERATOR.md
